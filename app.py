@@ -57,7 +57,7 @@ init_db()
 
 # --- UI LAYOUT ---
 
-# Form to Add Student
+# Form to Add Student (Visible to Everyone)
 st.subheader("Add New Student")
 with st.form("student_form", clear_on_submit=True):
     col1, col2, col3 = st.columns(3)
@@ -76,22 +76,11 @@ with st.form("student_form", clear_on_submit=True):
         else:
             st.error("All fields are required")
 
-# Display and Delete Section
+# Display Section (Visible to Everyone)
 st.subheader("Current Records")
 records = get_students()
 
 if records:
-    # Format data into a clean list for selection
-    options = {f"ID {r[0]}: {r[1]} ({r[2]}) - Grade: {r[3]}": r[0] for r in records}
-
-    # Show a dropdown to delete records
-    to_delete = st.selectbox("Select a student to remove:", list(options.keys()))
-    if st.button("Delete Selected Student", type="primary"):
-        delete_student(options[to_delete])
-        st.toast("Record deleted successfully!")
-        st.rerun()
-
-    st.markdown("---")
     # Display data table beautifully
     st.dataframe(
         records,
@@ -103,5 +92,34 @@ if records:
         },
         use_container_width=True,
     )
+
+    st.markdown("---")
+
+    # --- ADMIN ONLY SECTION ---
+    st.subheader("🛠️ Admin Controls")
+
+    # Password input field (masks the typing)
+    admin_password = st.text_input(
+        "Enter Admin Password to reveal Delete tools:", type="password"
+    )
+
+    # Check if the password matches
+    if admin_password == "admin123":
+        st.success("Access Granted!")
+
+        # Format data into a clean list for selection
+        options = {
+            f"ID {r[0]}: {r[1]} ({r[2]}) - Grade: {r[3]}": r[0] for r in records
+        }
+
+        # Show the dropdown and delete button ONLY if password is correct
+        to_delete = st.selectbox("Select a student to remove:", list(options.keys()))
+        if st.button("Delete Selected Student", type="primary"):
+            delete_student(options[to_delete])
+            st.toast("Record deleted successfully!")
+            st.rerun()
+    elif admin_password != "":
+        st.error("Incorrect Password")
+
 else:
     st.info("No records found in the database. Add a student above!")
