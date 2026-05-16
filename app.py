@@ -77,20 +77,24 @@ with st.form("student_form", clear_on_submit=True):
             st.error("All fields are required")
 
 # Display Section (Visible to Everyone)
+# Display Section (Visible to Everyone)
 st.subheader("Current Records")
 records = get_students()
 
 if records:
     import pandas as pd
 
-    # Convert the raw database rows into a structured DataFrame with clear column headers
+    # 1. Load the data with headers
     df = pd.DataFrame(records, columns=["ID", "Student Name", "Major / Department", "Final Grade"])
     
-    # Display the table beautifully using the structured DataFrame
+    # 2. Drop the ID column visually (axis=1 means drop a column, not a row)
+    df_visible = df.drop(columns=["ID"])
+    
+    # 3. Display the new table without the ID column
     st.dataframe(
-        df,
+        df_visible,
         use_container_width=True,
-        hide_index=True # This hides the extra row numbers on the far left
+        hide_index=True
     )
 
     st.markdown("---")
