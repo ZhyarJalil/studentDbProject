@@ -81,7 +81,7 @@ st.subheader("Current Records")
 records = get_students()
 
 if records:
-   import pandas as pd
+    import pandas as pd
 
     # Convert the raw database rows into a structured DataFrame with clear column headers
     df = pd.DataFrame(records, columns=["ID", "Student Name", "Major / Department", "Final Grade"])
