@@ -81,16 +81,16 @@ st.subheader("Current Records")
 records = get_students()
 
 if records:
-    # Display data table beautifully
+   import pandas as pd
+
+    # Convert the raw database rows into a structured DataFrame with clear column headers
+    df = pd.DataFrame(records, columns=["ID", "Student Name", "Major / Department", "Final Grade"])
+    
+    # Display the table beautifully using the structured DataFrame
     st.dataframe(
-        records,
-        column_config={
-            0: "ID",
-            1: "Student Name",
-            2: "Major / Department",
-            3: "Final Grade",
-        },
+        df,
         use_container_width=True,
+        hide_index=True # This hides the extra row numbers on the far left
     )
 
     st.markdown("---")
