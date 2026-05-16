@@ -68,7 +68,7 @@ with st.form("student_form", clear_on_submit=True):
     with col3:
         grade = st.text_input("Grade", placeholder="A")
 
-    submit = st.form_submit_with_button("Add Student")
+    submit = st.form_submit_button("Add Student")
     if submit:
         if name and major and grade:
             add_student(name, major, grade)
