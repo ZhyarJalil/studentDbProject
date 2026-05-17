@@ -69,24 +69,29 @@ init_db()
 # --- UI LAYOUT ---
 
 # Form to Add Student (Visible to Everyone)
+# --- NEW CLEAN INPUT SECTION (NO FORM WRAPPER) ---
 st.subheader("Add New Student")
-with st.form("student_form", clear_on_submit=True):
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        name = st.text_input("Name", placeholder="Zhyar Jalil")
-    with col2:
-        major = st.text_input("Major", placeholder="Computer Engineer")
-    with col3:
-        grade = st.text_input("Grade", placeholder="Third")
 
-    submit = st.form_submit_button("Add Student", help="Hi")
-    if submit:
-        if name and major and grade:
-            add_student(name, major, grade)
-            st.success(f"Added {name} successfully!")
-        else:
-            st.error("All fields are required")
+# Create 3 clean input columns
+col1, col2, col3 = st.columns(3)
+with col1:
+    name = st.text_input("Name", placeholder="John Doe", key="input_name")
+with col2:
+    major = st.text_input("Major", placeholder="Computer Science", key="input_major")
+with col3:
+    grade = st.text_input("Grade", placeholder="A", key="input_grade")
 
+# Regular button instead of a form submit button
+if st.button("Add Student"):
+    if name and major and grade:
+        add_student(name, major, grade)
+        st.success(f"Added {name} successfully!")
+        
+        # This force-clears the input boxes immediately after clicking add
+        st.rerun()
+    else:
+        st.error("All fields are required")
+        
 # Display Section (Visible to Everyone)
 # Display Section (Visible to Everyone)
 st.subheader("Current Records")
