@@ -3,7 +3,7 @@ import streamlit as st
 
 # Page Configuration
 st.set_page_config(page_title="Student Database", layout="centered")
-st.title("🎓 Student Record Management System")
+st.title("Student Record Management System")
 
 
 # --- DATABASE FUNCTIONS ---
