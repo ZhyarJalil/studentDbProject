@@ -62,11 +62,11 @@ st.subheader("Add New Student")
 with st.form("student_form", clear_on_submit=True):
     col1, col2, col3 = st.columns(3)
     with col1:
-        name = st.text_input("Name", placeholder="John Doe")
+        name = st.text_input("Name", placeholder="Haval Sdiq")
     with col2:
-        major = st.text_input("Major", placeholder="Computer Science")
+        major = st.text_input("Major", placeholder="Computer Engineer")
     with col3:
-        grade = st.text_input("Grade", placeholder="A")
+        grade = st.text_input("Grade", placeholder="Third")
 
     submit = st.form_submit_button("Add Student")
     if submit:
