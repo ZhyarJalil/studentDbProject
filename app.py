@@ -111,7 +111,7 @@ if records:
     st.markdown("---")
 
     # --- ADMIN ONLY SECTION ---
-    st.subheader("🛠️ Admin Controls")
+    st.subheader("Admin Controls")
 
     # Password input field (masks the typing)
     admin_password = st.text_input(
