@@ -75,11 +75,11 @@ st.subheader("Add New Student")
 # Create 3 clean input columns
 col1, col2, col3 = st.columns(3)
 with col1:
-    name = st.text_input("Name", placeholder="John Doe", key="input_name")
+    name = st.text_input("Name", placeholder="Zhyar Jalil", key="input_name")
 with col2:
-    major = st.text_input("Major", placeholder="Computer Science", key="input_major")
+    major = st.text_input("Major", placeholder="Computer Engineer", key="input_major")
 with col3:
-    grade = st.text_input("Grade", placeholder="A", key="input_grade")
+    grade = st.text_input("Grade", placeholder="Second", key="input_grade")
 
 # Regular button instead of a form submit button
 if st.button("Add Student"):
