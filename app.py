@@ -47,7 +47,18 @@ def get_students():
 def delete_student(student_id):
     conn = sqlite3.connect("students.db")
     cursor = conn.cursor()
+    
+    # 1. Delete the student
     cursor.execute("DELETE FROM students WHERE id = ?", (student_id,))
+    
+    # 2. Check if the table is now completely empty
+    cursor.execute("SELECT COUNT(*) FROM students")
+    count = cursor.fetchone()[0]
+    
+    # 3. If empty, completely reset the internal auto-increment counter back to 0
+    if count == 0:
+        cursor.execute("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'students'")
+        
     conn.commit()
     conn.close()
 
